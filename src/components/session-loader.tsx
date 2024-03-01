@@ -1,17 +1,17 @@
-import { Session } from 'next-auth'
+import { Session } from "next-auth"
 
-import { auth } from '@/lib/auth'
+import { auth } from "@/lib/auth"
 
 interface SessionLoaderProps {
-	children: ({}: Session) => React.ReactNode
+  children: ({}: Session) => React.ReactNode
 }
 
 async function SessionLoader({ children }: SessionLoaderProps) {
-	const session = await auth()
+  const session = await auth()
 
-	if (!session) return
+  if (!session) return
 
-	return <>{children(session)}</>
+  return <>{children(session)}</>
 }
 
 export { SessionLoader }
