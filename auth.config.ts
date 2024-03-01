@@ -11,8 +11,6 @@ export const authConfig = {
       return true
     },
   },
-
-  //@ts-expect-error
-  adapter: PrismaAdapter(prisma),
+  adapter: PrismaAdapter(prisma) as NextAuthConfig["adapter"],
   providers: [GoogleProvider], // Add providers with an empty array for now
 } satisfies NextAuthConfig

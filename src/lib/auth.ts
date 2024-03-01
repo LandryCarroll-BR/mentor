@@ -2,7 +2,6 @@ import NextAuth from "next-auth"
 import { authConfig } from "@/root/auth.config"
 import GoogleProvider from "next-auth/providers/google"
 
-// @ts-ignore
 export const { auth, signIn, signOut, handlers } = NextAuth({
   ...authConfig,
   providers: [
