@@ -2,12 +2,9 @@ import { Main } from "@/components/main"
 import { Container, Section } from "@/components/layout"
 import { SignInButton } from "@/components/sign-in-button"
 import { SignOutButton } from "@/components/sign-out-button"
-import { auth } from "@/lib/auth"
-import { SessionLoader } from "../components/session-loader"
+import { SessionLoader } from "@/components/session-loader"
 
 export default async function Home() {
-  const session = await auth()
-
   return (
     <Main className='h-screen items-center justify-center gap-2'>
       <Section>
