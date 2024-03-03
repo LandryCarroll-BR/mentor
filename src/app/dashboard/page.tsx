@@ -5,14 +5,14 @@ import { Main } from "@/components/main"
 import { Box, Flex } from "@/components/layout"
 import { UserNav } from "@/components/user-nav"
 import { Button } from "@/components/ui/button"
-import { SessionLoader } from "../components/session-loader"
+import { SessionLoader } from "../../components/session-loader"
 
-export default async function Home() {
+export default async function Dashboard() {
   return (
     <Main className='h-dvh w-full flex-row'>
-      <aside className='flex flex-col border-r pb-3 md:w-full md:max-w-[250px]'>
-        <Box className='hidden h-16 px-6 py-4 text-2xl font-bold md:block'>Mentor</Box>
-        <nav className='flex flex-1 flex-col gap-2 p-4'>
+      <aside className='flex flex-col border-r p-4 pb-3 md:w-full md:max-w-[250px]'>
+        <Box className='mb-8 hidden px-2 text-2xl font-bold md:block'>Mentor</Box>
+        <nav className='flex flex-1 flex-col gap-2'>
           <Button asChild className='justify-start gap-2 px-2'>
             <Link href={"/"}>
               <DashboardIcon className='h-5 w-5' />
