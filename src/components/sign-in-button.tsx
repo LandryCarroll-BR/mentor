@@ -1,6 +1,7 @@
+import { BuiltInProviderType } from "next-auth/providers"
+
 import { signIn } from "@/lib/auth"
 import { Button } from "@/ui/button"
-import { BuiltInProviderType } from "next-auth/providers"
 
 type SignInButtonProps = { provider?: BuiltInProviderType } & React.ComponentPropsWithRef<typeof Button>
 
