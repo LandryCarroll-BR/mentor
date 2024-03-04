@@ -1,9 +1,10 @@
-import NextAuth from "next-auth"
-import GoogleProvider from "next-auth/providers/google"
-import Email from "next-auth/providers/email"
+import NextAuth from 'next-auth'
+import GoogleProvider from 'next-auth/providers/google'
+import Email from 'next-auth/providers/email'
 
-import { env } from "@/lib/env"
-import { authConfig } from "@/root/auth.config"
+import { env } from '@/lib/env'
+import { authConfig } from '@/root/auth.config'
+import prisma from './prisma'
 
 export const { auth, signIn, signOut, handlers } = NextAuth({
   ...authConfig,
@@ -26,18 +27,18 @@ export const { auth, signIn, signOut, handlers } = NextAuth({
   ],
   callbacks: {
     redirect({ url }) {
-      if (url.includes("login")) return "/dashboard"
+      if (url.includes('login')) return '/dashboard'
       return url
     },
-    authorized({ request: { nextUrl }, auth }) {
+    async authorized({ request: { nextUrl }, auth }) {
+      console.log('Authorize')
       const isLoggedIn = !!auth?.user
-      console.log(isLoggedIn)
-      const isOnDashboard = nextUrl.pathname.startsWith("/dashboard")
+      const isOnDashboard = nextUrl.pathname.startsWith('/dashboard')
       if (isOnDashboard) {
         if (isLoggedIn) return true
         return false // Redirect unauthenticated users to login page
       } else if (isLoggedIn) {
-        return Response.redirect(new URL("/dashboard", nextUrl))
+        return Response.redirect(new URL('/dashboard', nextUrl))
       }
       return true
     },

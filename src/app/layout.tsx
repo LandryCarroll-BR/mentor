@@ -1,14 +1,14 @@
-import type { Metadata } from "next"
-import { Inter } from "next/font/google"
+import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
 
-import "@/styles/globals.css"
-import { cn } from "@/lib/utils"
+import '@/styles/globals.css'
+import { cn } from '@/lib/utils'
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-sans" })
+const inter = Inter({ subsets: ['latin'], variable: '--font-sans' })
 
 export const metadata: Metadata = {
-  title: "Mentor App",
-  description: "A way to connect mentors to mentees",
+  title: 'Mentor App',
+  description: 'A way to connect mentors to mentees',
 }
 
 export default function RootLayout({
@@ -18,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body className={cn("", inter.variable)}>{children}</body>
+      <body className={cn('flex min-h-dvh flex-col', inter.variable)}>{children}</body>
     </html>
   )
 }

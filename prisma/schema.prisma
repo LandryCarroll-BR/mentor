@@ -7,7 +7,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 model Account {
   id                String  @id @default(cuid())
   userId            String
@@ -35,13 +34,18 @@ model Session {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime?
-  image         String?
-  accounts      Account[]
-  sessions      Session[]
+  id                String             @id @default(cuid())
+  name              String?
+  email             String?            @unique
+  emailVerified     DateTime?
+  image             String?
+  accounts          Account[]
+  assessments       Assessment[]
+  assessmentResults AssessmentResult[]
+  certifications    Certification[]
+  mentoredBy        MentorReference[]  @relation("MentorReferences")
+  sessions          Session[]
+  organizations     UserOrganization[]
 }
 
 model VerificationToken {
@@ -50,4 +54,104 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model UserOrganization {
+  userId         String
+  organizationId String
+  role           Role
+  organization   Organization @relation(fields: [organizationId], references: [id])
+  user           User         @relation(fields: [userId], references: [id])
+
+  @@id([userId, organizationId])
+}
+
+model Organization {
+  id          String             @id @default(cuid())
+  name        String
+  assessments Assessment[]
+  users       UserOrganization[]
+}
+
+model Assessment {
+  id             String             @id @default(cuid())
+  title          String
+  description    String?
+  organizationId String
+  passingScore   Float?
+  userId         String?
+  organization   Organization       @relation(fields: [organizationId], references: [id])
+  User           User?              @relation(fields: [userId], references: [id])
+  results        AssessmentResult[]
+  certifiedUsers Certification[]
+  questions      Question[]
+}
+
+model Question {
+  id           String     @id @default(cuid())
+  assessmentId String
+  text         String
+  youtubeUrl   String?
+  choices      Choice[]
+  assessment   Assessment @relation(fields: [assessmentId], references: [id])
+}
+
+model Choice {
+  id         String   @id @default(cuid())
+  questionId String
+  text       String
+  isCorrect  Boolean
+  question   Question @relation(fields: [questionId], references: [id])
+}
+
+model Certification {
+  id           String     @id @default(cuid())
+  userId       String
+  assessmentId String
+  score        Float
+  issuedAt     DateTime   @default(now())
+  assessment   Assessment @relation(fields: [assessmentId], references: [id])
+  user         User       @relation(fields: [userId], references: [id])
+
+  @@unique([userId, assessmentId])
+}
+
+model AssessmentResult {
+  id           String     @id @default(cuid())
+  userId       String
+  assessmentId String
+  score        Float
+  completedAt  DateTime   @default(now())
+  assessment   Assessment @relation(fields: [assessmentId], references: [id])
+  user         User       @relation(fields: [userId], references: [id])
+
+  @@unique([userId, assessmentId, completedAt])
+}
+
+model MentorReference {
+  id                 String              @id @default(cuid())
+  mentorId           String
+  referrerEmail      String
+  isCompleted        Boolean             @default(false)
+  completedAt        DateTime?
+  mentor             User                @relation("MentorReferences", fields: [mentorId], references: [id])
+  referenceResponses ReferenceResponse[]
+
+  @@unique([mentorId, referrerEmail])
+}
+
+model ReferenceResponse {
+  id                String          @id @default(cuid())
+  mentorReferenceId String
+  question          String
+  response          String
+  mentorReference   MentorReference @relation(fields: [mentorReferenceId], references: [id])
+
+  @@index([mentorReferenceId])
+}
+
+enum Role {
+  ADMIN
+  MENTOR
+  MENTEE
 }
