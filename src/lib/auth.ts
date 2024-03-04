@@ -26,12 +26,11 @@ export const { auth, signIn, signOut, handlers } = NextAuth({
     }),
   ],
   callbacks: {
-    redirect({ url }) {
+    async redirect({ url }) {
       if (url.includes('login')) return '/dashboard'
       return url
     },
     async authorized({ request: { nextUrl }, auth }) {
-      console.log('Authorize')
       const isLoggedIn = !!auth?.user
       const isOnDashboard = nextUrl.pathname.startsWith('/dashboard')
       if (isOnDashboard) {
@@ -40,6 +39,9 @@ export const { auth, signIn, signOut, handlers } = NextAuth({
       } else if (isLoggedIn) {
         return Response.redirect(new URL('/dashboard', nextUrl))
       }
+      return true
+    },
+    async signIn() {
       return true
     },
   },

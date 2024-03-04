@@ -88,7 +88,7 @@ export default async function Dashboard() {
             </Flex>
             <Flex className='flex-1 flex-col p-4 pt-0'>
               <Box className='w-full flex-1 rounded-md border bg-white'>
-                <div className='h-[200vh]'></div>
+                <div className=''></div>
               </Box>
             </Flex>
           </Flex>
