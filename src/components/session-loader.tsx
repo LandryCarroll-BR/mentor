@@ -1,15 +1,16 @@
-import { Session } from "next-auth"
+import { Session } from 'next-auth'
 
-import { auth } from "@/lib/auth"
+import { auth } from '@/lib/auth'
 
 interface SessionLoaderProps {
   children: ({}: Session) => React.ReactNode
+  fallback?: React.ReactNode
 }
 
-async function SessionLoader({ children }: SessionLoaderProps) {
+async function SessionLoader({ children, fallback }: SessionLoaderProps) {
   const session = await auth()
 
-  if (!session) return
+  if (!session) return <>{fallback}</>
 
   return <>{children(session)}</>
 }

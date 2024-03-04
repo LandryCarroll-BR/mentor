@@ -23,10 +23,12 @@ export default async function Dashboard() {
   return (
     <ProtectedPage>
       <Flex className='w-full px-4 pb-0 pt-2'>
-        <Flex className='h-fit w-full items-center gap-2 p-2 text-xl font-bold'>
-          <Icons.logo className='h-5 w-5' />
-          <Box>Mentor</Box>
-        </Flex>
+        <Link href={'/'}>
+          <Flex className='h-fit w-full items-center gap-2 p-2 text-xl font-bold'>
+            <Icons.logo className='h-5 w-5' />
+            <Box>Mentor</Box>
+          </Flex>
+        </Link>
         <Flex className='ml-auto items-center'>
           <SessionLoader>{(session) => <UserNav session={session} />}</SessionLoader>
         </Flex>
@@ -42,7 +44,7 @@ export default async function Dashboard() {
               <CaretSortIcon className='hidden md:block' />
             </Button>
           </Box>
-          <nav className='flex flex-col gap-2 '>
+          <nav className='flex flex-col gap-2'>
             <Button asChild className='justify-start gap-2 px-2' variant={'secondary'}>
               <Link href={'/'}>
                 <DashboardIcon className='h-5 w-5' />
@@ -67,7 +69,7 @@ export default async function Dashboard() {
                 <Box className='text-md hidden md:block'>Messages</Box>
               </Link>
             </Button>
-            <Button asChild className='fixed bottom-4 mt-auto justify-start gap-2 px-2' variant={'ghost'}>
+            <Button asChild className='fixed bottom-4 w-full max-w-[200px] justify-start gap-2 px-2' variant={'ghost'}>
               <Link href={'/'}>
                 <GearIcon className='h-5 w-5' />
                 <Box className='text-md hidden md:block'>Settings</Box>
@@ -76,17 +78,17 @@ export default async function Dashboard() {
           </nav>
         </aside>
         <article className='flex flex-1 flex-col'>
-          <Flex className='w-full flex-1 flex-col gap-4 rounded-lg bg-muted p-0'>
+          <Flex className='w-full flex-1 flex-col gap-3 rounded-lg bg-muted p-0'>
             <Flex className='w-full p-4 pb-0'>
               <Box className='text-3xl font-semibold'>Dashboard</Box>
               <Box className='ml-auto'>
-                <Button className='gap-2 pl-3'>
+                <Button className='gap-2 pl-3' size={'sm'}>
                   <Link2Icon className='h-4 w-4' />
                   <Box> Share Link </Box>
                 </Button>
               </Box>
             </Flex>
-            <Flex className='flex-1 flex-col p-4 pt-0'>
+            <Flex className='flex-1 flex-col p-4 pt-0.5'>
               <Box className='w-full flex-1 rounded-md border bg-white'>
                 <div className=''></div>
               </Box>

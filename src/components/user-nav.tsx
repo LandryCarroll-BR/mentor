@@ -9,8 +9,8 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { SignInButton } from '@/components/sign-in-button'
 import { SignOutButton } from '@/components/sign-out-button'
 
-const UserNav: React.FC<{ session: Session | null }> = ({ session }) => {
-  if (!session) return <SignInButton>Log In</SignInButton>
+const UserNav: React.FC<{ session?: Session }> = ({ session }) => {
+  if (!session) return
 
   return (
     <DropdownMenu>

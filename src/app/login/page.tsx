@@ -17,10 +17,12 @@ export default async function Login() {
           className='w-full object-cover object-bottom'
         />
         <div className='absolute inset-0 bg-gradient-to-t from-zinc-950 to-zinc-50/0' />
-        <Flex className='relative z-20 flex items-center text-lg font-medium'>
-          <Icons.logo className='mr-2 h-6 w-6' />
-          Mentor
-        </Flex>
+        <Link href={'/'}>
+          <Flex className='relative z-20 flex items-center text-lg font-medium'>
+            <Icons.logo className='mr-2 h-6 w-6' />
+            Mentor
+          </Flex>
+        </Link>
         <Box className='relative z-20 mt-auto'>
           <blockquote className='space-y-2'>
             <p className='text-lg'>
@@ -33,10 +35,12 @@ export default async function Login() {
       </Flex>
       <Flex className='flex flex-col lg:p-8'>
         <Section className='mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[360px]'>
-          <Flex className='relative z-20 items-center justify-center text-lg font-medium lg:hidden'>
-            <Icons.logo className='mr-2 h-6 w-6' />
-            Mentor
-          </Flex>
+          <Link href={'/'}>
+            <Flex className='relative z-20 items-center justify-center text-lg font-medium lg:hidden'>
+              <Icons.logo className='mr-2 h-6 w-6' />
+              Mentor
+            </Flex>
+          </Link>
           <Flex className='flex flex-col space-y-2 text-center'>
             <h1 className='text-2xl font-semibold tracking-tight'>Sign in to your account</h1>
             <p className='text-sm text-muted-foreground'>Enter your email below to create your account or sign in</p>

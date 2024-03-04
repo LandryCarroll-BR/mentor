@@ -1,57 +1,46 @@
-import Link from "next/link"
-import { ChatBubbleIcon, DashboardIcon, GearIcon, PersonIcon, RocketIcon } from "@radix-ui/react-icons"
-
-import { Main } from "@/components/main"
-import { Box, Flex } from "@/components/layout"
-import { UserNav } from "@/components/user-nav"
-import { Button } from "@/components/ui/button"
-import { SessionLoader } from "../components/session-loader"
+import { Main } from '@/components/main'
+import { Box, Flex } from '../components/layout'
+import { Icons } from '../components/icons'
+import { SessionLoader } from '../components/session-loader'
+import { UserNav } from '../components/user-nav'
+import { SignInButton } from '../components/sign-in-button'
+import Link from 'next/link'
+import { Button } from '../components/ui/button'
+import { PageActions, PageHeader, PageHeaderDescription, PageHeaderHeading } from '../components/page-header'
 
 export default async function Home() {
   return (
-    <Main className='h-dvh w-full flex-row'>
-      <aside className='flex flex-col border-r pb-3 md:w-full md:max-w-[250px]'>
-        <Box className='hidden h-16 px-6 py-4 text-2xl font-bold md:block'>Mentor</Box>
-        <nav className='flex flex-1 flex-col gap-2 p-4'>
-          <Button asChild className='justify-start gap-2 px-2'>
-            <Link href={"/"}>
-              <DashboardIcon className='h-5 w-5' />
-              <Box className='text-md hidden md:block'>Dashboard</Box>
-            </Link>
-          </Button>
-          <Button asChild className='justify-start gap-2 px-2' variant={"ghost"}>
-            <Link href={"/"}>
-              <PersonIcon className='h-5 w-5' />
-              <Box className='text-md hidden md:block'>Mentors</Box>
-            </Link>
-          </Button>
-          <Button asChild className='justify-start gap-2 px-2' variant={"ghost"}>
-            <Link href={"/"}>
-              <RocketIcon className='h-5 w-5' />
-              <Box className='text-md hidden md:block'>Assessments</Box>
-            </Link>
-          </Button>
-          <Button asChild className='justify-start gap-2 px-2' variant={"ghost"}>
-            <Link href={"/"}>
-              <ChatBubbleIcon className='h-5 w-5' />
-              <Box className='text-md hidden md:block'>Messages</Box>
-            </Link>
-          </Button>
-          <Button asChild className='mt-auto justify-start gap-2 px-2' variant={"ghost"}>
-            <Link href={"/"}>
-              <GearIcon className='h-5 w-5' />
-              <Box className='text-md hidden md:block'>Settings</Box>
-            </Link>
-          </Button>
-        </nav>
-      </aside>
-      <article className='flex-col0 flex flex-1'>
-        <Flex className='h-fit w-full border-b p-3'>
-          <Box className='ml-auto'>
-            <SessionLoader>{(session) => <UserNav session={session} />}</SessionLoader>
-          </Box>
+    <>
+      <Flex className='w-full px-4 pb-0 pt-2'>
+        <Link href={'/'}>
+          <Flex className='h-fit w-full items-center gap-2 p-2 text-xl font-bold'>
+            <Icons.logo className='h-5 w-5' />
+            <Box>Mentor</Box>
+          </Flex>
+        </Link>
+        <Flex className='ml-auto items-center'>
+          <SessionLoader fallback={<SignInButton variant={'outline'}>Log In</SignInButton>}>
+            {() => (
+              <Button asChild size={'sm'} variant={'outline'}>
+                <Link href={'/dashboard'}>Dashboard</Link>
+              </Button>
+            )}
+          </SessionLoader>
         </Flex>
-      </article>
-    </Main>
+      </Flex>
+      <Main className='h-dvh w-full flex-row'>
+        <PageHeader>
+          <PageHeaderHeading>Welcome to Mentor!</PageHeaderHeading>
+          <PageHeaderDescription>
+            A place where mentors can connect with others. This project is currently under development.
+          </PageHeaderDescription>
+          <PageActions>
+            <Button asChild>
+              <Link href={'/login'}>Sign Up</Link>
+            </Button>
+          </PageActions>
+        </PageHeader>
+      </Main>
+    </>
   )
 }
