@@ -23,7 +23,7 @@ export default async function AdminSidebarNav({ organizationId }: { organization
         </Button>
       ))}
 
-      <Button asChild className='mt-auto justify-start gap-2 px-2' variant={'ghost'}>
+      <Button asChild className='fixed bottom-4 w-[200px] justify-start gap-2 px-2' variant={'ghost'}>
         <ActiveLink href={`/dashboard/${organizationId}/settings`} activeClassName='bg-secondary'>
           <GearIcon className='h-5 w-5' />
           <Box className='text-md hidden md:block'>Settings</Box>

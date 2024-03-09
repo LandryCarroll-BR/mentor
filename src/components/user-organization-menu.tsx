@@ -1,9 +1,12 @@
-import { GlobeIcon } from '@radix-ui/react-icons'
+import { ArrowLeftIcon, GlobeIcon } from '@radix-ui/react-icons'
 
 import { Box } from '@/components/layout'
 import { SessionLoader } from '@/data/loaders/session-loader'
 import { UserOrganizationLoader } from '@/data/loaders/user-organization'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/ui/select'
+import { Button } from './ui/button'
+import Link from 'next/link'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from './ui/dropdown-menu'
 
 function UserOrganizationMenu({ organizationId }: { organizationId: string }) {
   return (
@@ -11,31 +14,40 @@ function UserOrganizationMenu({ organizationId }: { organizationId: string }) {
       <SessionLoader>
         {({ user }) => (
           <Box className='pb-2'>
-            <Select>
+            <DropdownMenu>
               <UserOrganizationLoader userId={user.id} organizationId={organizationId} fallback={<>testing</>}>
                 {({ userOrg }) => (
-                  <SelectTrigger className='w-full pl-0'>
-                    <Box className='mr-2 rounded-md bg-muted p-2'>
-                      <GlobeIcon className='h-5 w-5 text-primary' />
-                    </Box>
-                    <SelectValue placeholder={userOrg?.organization.name} defaultValue={organizationId} />
-                  </SelectTrigger>
+                  <DropdownMenuTrigger className='w-full pl-0' asChild>
+                    <Button variant={'outline'} className='justify-start gap-2 pl-0'>
+                      <Box className='border-r p-2'>
+                        <GlobeIcon className='text-primary' />
+                      </Box>
+                      {userOrg?.organization.name}
+                    </Button>
+                  </DropdownMenuTrigger>
                 )}
               </UserOrganizationLoader>
-              <SelectContent>
+              <DropdownMenuContent className='w-[200px]'>
                 <UserOrganizationLoader.List userId={user.id}>
                   {({ userOrgs }) => (
                     <>
                       {userOrgs?.map((userOrg) => (
-                        <SelectItem key={userOrg.organization.id} value={userOrg.organization.id}>
-                          {userOrg.organization.name}
-                        </SelectItem>
+                        <DropdownMenuItem key={userOrg.organization.id} asChild>
+                          <Link href={`/dashboard/${userOrg.organization.id}`}>{userOrg.organization.name}</Link>
+                        </DropdownMenuItem>
                       ))}
                     </>
                   )}
                 </UserOrganizationLoader.List>
-              </SelectContent>
-            </Select>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem asChild>
+                  <Link href={`/dashboard/`} className='justify-center gap-2'>
+                    <ArrowLeftIcon />
+                    All Organizations
+                  </Link>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </Box>
         )}
       </SessionLoader>
