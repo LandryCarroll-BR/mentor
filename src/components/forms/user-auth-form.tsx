@@ -1,31 +1,23 @@
-import * as React from "react"
+import * as React from 'react'
 
-import { cn } from "@/lib/utils"
-import { Button } from "../ui/button"
-import { Icons } from "../icons"
-import { Label } from "../ui/label"
-import { Input } from "../ui/input"
-import { SignInButton } from "../sign-in-button"
+import { cn } from '@/lib/utils'
+import { Label } from '@/ui/label'
+import { Input } from '@/ui/input'
+import { Icons } from '@/components/icons'
+import { SignInButton } from '@/components/sign-in-button'
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   return (
-    <div className={cn("grid gap-6", className)} {...props}>
+    <div className={cn('grid gap-6', className)} {...props}>
       <form>
         <div className='grid gap-2'>
           <div className='grid gap-1'>
             <Label className='sr-only' htmlFor='email'>
               Email
             </Label>
-            <Input
-              id='email'
-              placeholder='name@example.com'
-              type='email'
-              autoCapitalize='none'
-              autoComplete='email'
-              autoCorrect='off'
-            />
+            <Input id='email' placeholder='name@example.com' type='email' autoCapitalize='none' autoComplete='email' autoCorrect='off' />
           </div>
           {/* <Button disabled={isLoading}>
             {isLoading && <Icons.spinner className='mr-2 h-4 w-4 animate-spin' />}

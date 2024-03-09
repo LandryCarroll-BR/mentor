@@ -1,10 +1,8 @@
 import NextAuth from 'next-auth'
 import GoogleProvider from 'next-auth/providers/google'
-import Email from 'next-auth/providers/email'
 
 import { env } from '@/lib/env'
 import { authConfig } from '@/root/auth.config'
-import prisma from './prisma'
 
 export const { auth, signIn, signOut, handlers } = NextAuth({
   ...authConfig,
@@ -13,17 +11,17 @@ export const { auth, signIn, signOut, handlers } = NextAuth({
       clientId: env.GOOGLE_CLIENT_ID,
       clientSecret: env.GOOGLE_CLIENT_SECRET,
     }),
-    Email({
-      server: {
-        host: env.SMTP_HOST,
-        port: Number(env.SMTP_PORT),
-        auth: {
-          user: env.SMTP_USER,
-          pass: env.SMTP_PASSWORD,
-        },
-      },
-      from: env.EMAIL_FROM,
-    }),
+    // Email({
+    //   server: {
+    //     host: env.SMTP_HOST,
+    //     port: Number(env.SMTP_PORT),
+    //     auth: {
+    //       user: env.SMTP_USER,
+    //       pass: env.SMTP_PASSWORD,
+    //     },
+    //   },
+    //   from: env.EMAIL_FROM,
+    // }),
   ],
   callbacks: {
     async redirect({ url }) {
@@ -33,15 +31,14 @@ export const { auth, signIn, signOut, handlers } = NextAuth({
     async authorized({ request: { nextUrl }, auth }) {
       const isLoggedIn = !!auth?.user
       const isOnDashboard = nextUrl.pathname.startsWith('/dashboard')
+
       if (isOnDashboard) {
         if (isLoggedIn) return true
         return false // Redirect unauthenticated users to login page
       } else if (isLoggedIn) {
         return Response.redirect(new URL('/dashboard', nextUrl))
       }
-      return true
-    },
-    async signIn() {
+
       return true
     },
   },

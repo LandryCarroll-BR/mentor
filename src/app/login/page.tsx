@@ -1,10 +1,10 @@
 import Link from 'next/link'
 import Image from 'next/image'
 
-import { UserAuthForm } from '@/components/forms/user-auth-form'
 import { Main } from '@/components/main'
 import { Icons } from '@/components/icons'
 import { Box, Flex, Section } from '@/components/layout'
+import { UserAuthForm } from '@/components/forms/user-auth-form'
 
 export default async function Login() {
   return (
@@ -26,8 +26,8 @@ export default async function Login() {
         <Box className='relative z-20 mt-auto'>
           <blockquote className='space-y-2'>
             <p className='text-lg'>
-              &ldquo;A mentor is not someone who walks ahead of us to show us how they did it. A mentor is someone who
-              walks alongside us to show us what we can do.&rdquo;
+              &ldquo;A mentor is not someone who walks ahead of us to show us how they did it. A mentor is someone who walks alongside us to
+              show us what we can do.&rdquo;
             </p>
             <footer className='text-sm'>John C. Maxwell</footer>
           </blockquote>

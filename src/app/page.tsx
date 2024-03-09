@@ -1,12 +1,14 @@
-import { Main } from '@/components/main'
-import { Box, Flex } from '../components/layout'
-import { Icons } from '../components/icons'
-import { SessionLoader } from '../components/session-loader'
-import { UserNav } from '../components/user-nav'
-import { SignInButton } from '../components/sign-in-button'
 import Link from 'next/link'
-import { Button } from '../components/ui/button'
-import { PageActions, PageHeader, PageHeaderDescription, PageHeaderHeading } from '../components/page-header'
+import { Suspense } from 'react'
+
+import { Main } from '@/components/main'
+import { Icons } from '@/components/icons'
+import { Button } from '@/components/ui/button'
+import { Box, Flex } from '@/components/layout'
+import { SignInButton } from '@/components/sign-in-button'
+import { SessionLoader } from '@/data/loaders/session-loader'
+import { UserOrganizationLoader } from '@/data/loaders/user-organization'
+import { PageActions, PageHeader, PageHeaderDescription, PageHeaderHeading } from '@/components/page-header'
 
 export default async function Home() {
   return (
@@ -19,13 +21,19 @@ export default async function Home() {
           </Flex>
         </Link>
         <Flex className='ml-auto items-center'>
-          <SessionLoader fallback={<SignInButton variant={'outline'}>Log In</SignInButton>}>
-            {() => (
-              <Button asChild size={'sm'} variant={'outline'}>
-                <Link href={'/dashboard'}>Dashboard</Link>
-              </Button>
-            )}
-          </SessionLoader>
+          <Suspense>
+            <SessionLoader fallback={<SignInButton variant={'outline'}>Log In</SignInButton>}>
+              {({ user }) => (
+                <UserOrganizationLoader.List userId={user.id}>
+                  {({ userOrgs }) => (
+                    <Button asChild size={'sm'} variant={'outline'}>
+                      <Link href={`/dashboard/${userOrgs[0].organization.id}`}>Dashboard</Link>
+                    </Button>
+                  )}
+                </UserOrganizationLoader.List>
+              )}
+            </SessionLoader>
+          </Suspense>
         </Flex>
       </Flex>
       <Main className='h-dvh w-full flex-row'>
