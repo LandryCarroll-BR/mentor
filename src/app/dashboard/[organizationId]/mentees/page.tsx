@@ -1,17 +1,19 @@
 import Link from 'next/link'
+import { PlusIcon } from '@radix-ui/react-icons'
 
+import { Button } from '@/ui/button'
 import { Main } from '@/components/main'
 import { Icons } from '@/components/icons'
-import { UserNav } from '@/components/user-nav'
 import { Box, Flex } from '@/components/layout'
-import { Link2Icon, PlusIcon } from '@radix-ui/react-icons'
+import { UserNav } from '@/components/user-nav'
+import { MenteeLoader } from '@/data/loaders/mentee-loader'
 import { ProtectedPage } from '@/components/protected-page'
 import { SessionLoader } from '@/data/loaders/session-loader'
-import AdminSidebarNav from '@/components/admin-sidebar-nav'
+import { AdminSidebarNav } from '@/components/admin-sidebar-nav'
+import { DataTable, menteeColumns } from '@/components/mentees-table'
+import { CreateMenteeForm } from '@/components/forms/create-mentee-form'
 import { UserOrganizationMenu } from '@/components/user-organization-menu'
-import { CopyButton } from '@/root/src/components/copy-button'
-import { env } from '@/root/src/lib/env'
-import { Button } from '@/root/src/components/ui/button'
+import { ResponsiveDialog, ResponsiveDialogContent, ResponsiveDialogTrigger } from '@/components/responsive-dialog'
 
 export default async function Dashboard({ params }: { params: { organizationId: string } }) {
   return (
@@ -37,15 +39,31 @@ export default async function Dashboard({ params }: { params: { organizationId: 
             <Flex className='w-full p-4 pb-0'>
               <Box className='text-3xl font-semibold'>Mentees</Box>
               <Box className='ml-auto'>
-                <Button className='gap-2 pl-2' size={'sm'}>
-                  <PlusIcon />
-                  Add Mentee
-                </Button>
+                <ResponsiveDialog>
+                  <ResponsiveDialogTrigger asChild>
+                    <Button className='gap-2 pl-2' size={'sm'}>
+                      <PlusIcon />
+                      Add Mentee
+                    </Button>
+                  </ResponsiveDialogTrigger>
+                  <ResponsiveDialogContent>
+                    <CreateMenteeForm organizationId={params.organizationId} />
+                  </ResponsiveDialogContent>
+                </ResponsiveDialog>
               </Box>
             </Flex>
             <Flex className='flex-1 flex-col p-4 pt-0.5'>
-              <Box className='w-full flex-1 rounded-md border bg-white'>
-                <div className=''></div>
+              <Box className='w-full flex-1 rounded-md border bg-white p-4'>
+                <MenteeLoader.List organizationId={params.organizationId}>
+                  {({ mentees }) => (
+                    <DataTable
+                      columns={menteeColumns}
+                      data={mentees.map(({ user }) => ({
+                        name: user.name,
+                      }))}
+                    />
+                  )}
+                </MenteeLoader.List>
               </Box>
             </Flex>
           </Flex>

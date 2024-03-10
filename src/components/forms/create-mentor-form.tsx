@@ -10,16 +10,16 @@ import { Button } from '@/ui/button'
 import { Flex } from '@/components/layout'
 import { useResponsiveDialog } from '@/components/responsive-dialog'
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/ui/form'
-import { mentorRegistrationSchema } from '../../data/schemas/mentor'
-import { registerMentor } from '../../data/actions/mentor'
+import { createMentorSchema } from '../../data/schemas/mentor'
+import { createMentor } from '../../data/actions/mentor'
 
-const formSchema = mentorRegistrationSchema
+const formSchema = createMentorSchema
 
 type FormSchema = z.infer<typeof formSchema>
 
-function MentorRegistrationForm({ organizationId }: { organizationId: string }) {
+function CreateMentorForm({ organizationId }: { organizationId: string }) {
   const { setOpen } = useResponsiveDialog()
-  const { execute, status, result } = useAction(registerMentor)
+  const { execute, status, result } = useAction(createMentor)
 
   const form = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
@@ -85,4 +85,4 @@ function MentorRegistrationForm({ organizationId }: { organizationId: string }) 
   )
 }
 
-export { MentorRegistrationForm }
+export { CreateMentorForm }

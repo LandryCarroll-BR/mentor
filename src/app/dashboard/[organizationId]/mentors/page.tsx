@@ -1,20 +1,19 @@
+import Link from 'next/link'
+import { PlusIcon } from '@radix-ui/react-icons'
+
+import { Button } from '@/ui/button'
 import { Main } from '@/components/main'
 import { Icons } from '@/components/icons'
-import { UserNav } from '@/components/user-nav'
 import { Box, Flex } from '@/components/layout'
-import { Link2Icon, PlusIcon } from '@radix-ui/react-icons'
+import { UserNav } from '@/components/user-nav'
+import { MentorLoader } from '@/data/loaders/mentor-loader'
 import { ProtectedPage } from '@/components/protected-page'
 import { SessionLoader } from '@/data/loaders/session-loader'
-import AdminSidebarNav from '@/components/admin-sidebar-nav'
+import { AdminSidebarNav } from '@/components/admin-sidebar-nav'
+import { DataTable, mentorColumns } from '@/components/mentors-table'
+import { CreateMentorForm } from '@/components/forms/create-mentor-form'
 import { UserOrganizationMenu } from '@/components/user-organization-menu'
-import { CopyButton } from '@/root/src/components/copy-button'
-import { env } from '@/root/src/lib/env'
-import { Button } from '@/root/src/components/ui/button'
-import { MentorLoader } from '@/root/src/data/loaders/mentor-loader'
-import { ResponsiveDialog, ResponsiveDialogContent, ResponsiveDialogTrigger } from '@/root/src/components/responsive-dialog'
-import { MentorRegistrationForm } from '@/root/src/components/forms/mentor-registration-form'
-import { DataTable, mentorColumns } from '@/root/src/components/mentors-table'
-import Link from 'next/link'
+import { ResponsiveDialog, ResponsiveDialogContent, ResponsiveDialogTrigger } from '@/components/responsive-dialog'
 
 export default async function Dashboard({ params }: { params: { organizationId: string } }) {
   return (
@@ -48,28 +47,26 @@ export default async function Dashboard({ params }: { params: { organizationId: 
                     </Button>
                   </ResponsiveDialogTrigger>
                   <ResponsiveDialogContent>
-                    <MentorRegistrationForm organizationId={params.organizationId} />
+                    <CreateMentorForm organizationId={params.organizationId} />
                   </ResponsiveDialogContent>
                 </ResponsiveDialog>
               </Box>
             </Flex>
             <Flex className='flex-1 flex-col p-4 pt-0.5'>
-              <Box className='w-full flex-1 rounded-md border bg-white'>
-                <div className='p-0'>
-                  <MentorLoader.List organizationId={params.organizationId}>
-                    {({ mentors }) => (
-                      <DataTable
-                        columns={mentorColumns}
-                        data={mentors.map(({ user }) => ({
-                          email: user.email,
-                          name: user.name,
-                          referrerEmail: user.referredBy[0].referrerEmail,
-                          status: user.referredBy[0].isCompleted ? 'Complete' : 'Pending',
-                        }))}
-                      />
-                    )}
-                  </MentorLoader.List>
-                </div>
+              <Box className='w-full flex-1 rounded-md border bg-white p-4'>
+                <MentorLoader.List organizationId={params.organizationId}>
+                  {({ mentors }) => (
+                    <DataTable
+                      columns={mentorColumns}
+                      data={mentors.map(({ user }) => ({
+                        email: user.email,
+                        name: user.name,
+                        referrerEmail: user.referredBy[0].referrerEmail,
+                        status: user.referredBy[0].isCompleted ? 'Complete' : 'Pending',
+                      }))}
+                    />
+                  )}
+                </MentorLoader.List>
               </Box>
             </Flex>
           </Flex>

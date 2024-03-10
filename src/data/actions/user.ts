@@ -2,9 +2,9 @@
 
 import prisma from '@/lib/prisma'
 import { action } from '@/lib/safe-action'
-import { createMenteeSchema } from '@/data/schemas/user'
+import { createUserSchema } from '@/data/schemas/user'
 
-export const createMentee = action(createMenteeSchema, async ({}) => {
+export const createUser = action(createUserSchema, async ({}) => {
   return await prisma.user.create({
     data: {
       name: '',

@@ -57,8 +57,8 @@ dependencies:
     specifier: 5.0.0-beta.4
     version: 5.0.0-beta.4(next@14.2.0-canary.11)(nodemailer@6.9.11)(react@18.2.0)
   next-safe-action:
-    specifier: ^6.1.0
-    version: 6.1.0(next@14.2.0-canary.11)(react@18.2.0)
+    specifier: ^6.2.0
+    version: 6.2.0(next@14.2.0-canary.11)(react@18.2.0)
   nodemailer:
     specifier: ^6.9.11
     version: 6.9.11
@@ -2961,8 +2961,8 @@ packages:
       react: 18.2.0
     dev: false
 
-  /next-safe-action@6.1.0(next@14.2.0-canary.11)(react@18.2.0):
-    resolution: {integrity: sha512-AoSTn6bCwadZg0CXoI4MHkeIQxw6PPegFvmn0Qw/h5+hPfaX4cdeXOCJjXLOy/EkMi5rf59A95RRvfyaiu212w==}
+  /next-safe-action@6.2.0(next@14.2.0-canary.11)(react@18.2.0):
+    resolution: {integrity: sha512-gssUs3OLoNjLXZalrQaly38s/mUtXsIcKWGIK3jFkW8GHl0/Xhq+3G8yEEyObET2YlYqUj79K+mH3iTNBLDcMw==}
     engines: {node: '>=18.17'}
     peerDependencies:
       next: '>= 14.0.0'

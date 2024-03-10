@@ -4,9 +4,9 @@ import { revalidateTag } from 'next/cache'
 
 import prisma from '@/lib/prisma'
 import { action } from '@/lib/safe-action'
-import { mentorRegistrationSchema } from '@/data/schemas/mentor'
+import { createMentorSchema } from '@/data/schemas/mentor'
 
-export const registerMentor = action(mentorRegistrationSchema, async ({ name, email, referrerEmail, organizationId }) => {
+export const createMentor = action(createMentorSchema, async ({ name, email, referrerEmail, organizationId }) => {
   const newMentor = await prisma.organization.update({
     data: {
       users: {

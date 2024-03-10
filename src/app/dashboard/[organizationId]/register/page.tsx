@@ -1,15 +1,15 @@
 import Link from 'next/link'
 import { Suspense } from 'react'
 
+import { Button } from '@/ui/button'
 import { Main } from '@/components/main'
 import { Icons } from '@/components/icons'
-import { Button } from '@/components/ui/button'
 import { Box, Container, Flex } from '@/components/layout'
 import { SignInButton } from '@/components/sign-in-button'
 import { SessionLoader } from '@/data/loaders/session-loader'
+import { CreateMentorForm } from '@/components/forms/create-mentor-form'
 import { UserOrganizationLoader } from '@/data/loaders/user-organization'
 import { PageActions, PageHeader, PageHeaderDescription, PageHeaderHeading } from '@/components/page-header'
-import { MentorRegistrationForm } from '@/root/src/components/forms/mentor-registration-form'
 
 export default async function Home({ params }: { params: { organizationId: string } }) {
   return (
@@ -55,7 +55,7 @@ export default async function Home({ params }: { params: { organizationId: strin
         </PageHeader>
         <Container className='max-w-md'>
           <Box className='rounded-lg border p-4 shadow-lg'>
-            <MentorRegistrationForm organizationId={params.organizationId} />
+            <CreateMentorForm organizationId={params.organizationId} />
           </Box>
         </Container>
       </Main>

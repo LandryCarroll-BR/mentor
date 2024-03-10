@@ -4,13 +4,10 @@ import { Main } from '@/components/main'
 import { Icons } from '@/components/icons'
 import { UserNav } from '@/components/user-nav'
 import { Box, Flex } from '@/components/layout'
-import { Link2Icon } from '@radix-ui/react-icons'
 import { ProtectedPage } from '@/components/protected-page'
 import { SessionLoader } from '@/data/loaders/session-loader'
-import AdminSidebarNav from '@/components/admin-sidebar-nav'
+import { AdminSidebarNav } from '@/components/admin-sidebar-nav'
 import { UserOrganizationMenu } from '@/components/user-organization-menu'
-import { CopyButton } from '@/root/src/components/copy-button'
-import { env } from '@/root/src/lib/env'
 
 export default async function Dashboard({ params }: { params: { organizationId: string } }) {
   return (

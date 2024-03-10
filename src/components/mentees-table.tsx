@@ -4,12 +4,9 @@ import { ColumnDef, flexRender, getCoreRowModel, useReactTable } from '@tanstack
 
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 
-export type Mentor =
+export type Mentee =
   | {
       name: string
-      email: string
-      status: 'Pending' | 'Complete'
-      referrerEmail: string
     }
   | unknown
 
@@ -18,23 +15,10 @@ export interface DataTableProps<TData, TValue> {
   data: TData[]
 }
 
-export const mentorColumns: ColumnDef<Mentor>[] = [
+export const menteeColumns: ColumnDef<Mentee>[] = [
   {
     accessorKey: 'name',
     header: 'Name',
-  },
-
-  {
-    accessorKey: 'email',
-    header: 'Mentor Email',
-  },
-  {
-    accessorKey: 'referrerEmail',
-    header: 'Reference Email',
-  },
-  {
-    accessorKey: 'status',
-    header: 'Status',
   },
 ]
 

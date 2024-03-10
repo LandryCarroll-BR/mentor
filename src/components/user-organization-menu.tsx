@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { ArrowLeftIcon, GlobeIcon } from '@radix-ui/react-icons'
+import { ArrowLeftIcon, CaretSortIcon, GlobeIcon } from '@radix-ui/react-icons'
 
 import { Button } from '@/ui/button'
 import { Box } from '@/components/layout'
@@ -17,11 +17,12 @@ function UserOrganizationMenu({ organizationId }: { organizationId: string }) {
               <UserOrganizationLoader userId={user.id} organizationId={organizationId} fallback={<>testing</>}>
                 {({ userOrg }) => (
                   <DropdownMenuTrigger className='w-full pl-0' asChild>
-                    <Button variant={'outline'} className='justify-start gap-2 pl-0 pr-0'>
+                    <Button variant={'outline'} className='justify-start gap-2 pl-0 pr-2'>
                       <Box className='border-0 p-2 md:border-r'>
                         <GlobeIcon className='text-primary' />
                       </Box>
                       <Box className='hidden md:block'>{userOrg?.organization.name}</Box>
+                      <CaretSortIcon className='ml-auto' />
                     </Button>
                   </DropdownMenuTrigger>
                 )}

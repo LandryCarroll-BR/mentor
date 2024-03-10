@@ -4,7 +4,7 @@ import { Box } from '@/components/layout'
 import { Button } from '@/components/ui/button'
 import { ActiveLink } from '@/root/src/components/active-link'
 
-export default async function AdminSidebarNav({ organizationId }: { organizationId: string }) {
+export async function AdminSidebarNav({ organizationId }: { organizationId: string }) {
   const adminSidebarNavLinks = [
     { label: 'Dashboard', href: `/dashboard/${organizationId}`, Icon: DashboardIcon },
     { label: 'Mentors', href: `/dashboard/${organizationId}/mentors`, Icon: PersonIcon },

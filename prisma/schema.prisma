@@ -43,6 +43,8 @@ model User {
   assessments       Assessment[]
   assessmentResults AssessmentResult[]
   certifications    Certification[]
+  menteeAssignments MentorMentee[]     @relation("MenteeAssignments")
+  mentorAssignments MentorMentee[]     @relation("MentorAssignments")
   referredBy        MentorReference[]  @relation("MentorReferences")
   sessions          Session[]
   organizations     UserOrganization[]
@@ -54,6 +56,19 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model MentorMentee {
+  id        String   @id @default(cuid())
+  mentorId  String
+  menteeId  String
+  startDate DateTime
+  status    String
+  goals     String?
+  mentee    User     @relation("MenteeAssignments", fields: [menteeId], references: [id])
+  mentor    User     @relation("MentorAssignments", fields: [mentorId], references: [id])
+
+  @@unique([mentorId, menteeId])
 }
 
 model UserOrganization {
