@@ -17,11 +17,11 @@ function UserOrganizationMenu({ organizationId }: { organizationId: string }) {
               <UserOrganizationLoader userId={user.id} organizationId={organizationId} fallback={<>testing</>}>
                 {({ userOrg }) => (
                   <DropdownMenuTrigger className='w-full pl-0' asChild>
-                    <Button variant={'outline'} className='justify-start gap-2 pl-0'>
-                      <Box className='border-r p-2'>
+                    <Button variant={'outline'} className='justify-start gap-2 pl-0 pr-0'>
+                      <Box className='border-0 p-2 md:border-r'>
                         <GlobeIcon className='text-primary' />
                       </Box>
-                      {userOrg?.organization.name}
+                      <Box className='hidden md:block'>{userOrg?.organization.name}</Box>
                     </Button>
                   </DropdownMenuTrigger>
                 )}
