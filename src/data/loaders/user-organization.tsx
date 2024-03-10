@@ -39,8 +39,6 @@ async function UserOrganizationList({ children, fallback, userId }: UserOrganiza
 
   const { data: userOrgs } = await cachedUserOrgs()
 
-  console.log(userOrgs)
-
   if (!userOrgs) return <>{fallback}</>
 
   return <>{children({ userOrgs })}</>

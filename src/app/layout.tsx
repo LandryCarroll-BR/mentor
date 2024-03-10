@@ -18,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body className={cn('flex min-h-dvh flex-col', inter.variable)}>{children}</body>
+      <body className={cn(inter.variable, 'flex min-h-dvh flex-col font-sans antialiased')}>{children}</body>
     </html>
   )
 }

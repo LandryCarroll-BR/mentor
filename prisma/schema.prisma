@@ -43,7 +43,7 @@ model User {
   assessments       Assessment[]
   assessmentResults AssessmentResult[]
   certifications    Certification[]
-  mentoredBy        MentorReference[]  @relation("MentorReferences")
+  referredBy        MentorReference[]  @relation("MentorReferences")
   sessions          Session[]
   organizations     UserOrganization[]
 }

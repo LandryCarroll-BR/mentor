@@ -10,10 +10,11 @@ import { ProtectedPage } from '@/components/protected-page'
 import { Heading, Paragraph } from '@/components/typography'
 import { SessionLoader } from '@/data/loaders/session-loader'
 import { Box, Container, Flex, Grid } from '@/components/layout'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { UserOrganizationLoader } from '@/data/loaders/user-organization'
-import { CreateOrganizationForm } from '@/components/forms/new-organization-form'
+import { CreateOrganizationForm } from '@/root/src/components/forms/create-organization-form'
 import { ResponsiveDialog, ResponsiveDialogContent, ResponsiveDialogTrigger } from '../../components/responsive-dialog'
+import { Badge } from '../../components/ui/badge'
 
 export default async function Dashboard() {
   return (
@@ -44,9 +45,12 @@ export default async function Dashboard() {
                           <Link key={userOrg.organization.id} href={`/dashboard/${userOrg.organization.id}`} className='group'>
                             <Card className='transition-colors group-hover:bg-muted'>
                               <CardHeader>
-                                <CardTitle className='flex gap-2'>
+                                <CardTitle className='flex flex-wrap gap-2'>
                                   <GlobeIcon className='text-muted-foreground' />
                                   {userOrg.organization.name}
+                                  <Badge variant={'secondary'} className='ml-auto capitalize'>
+                                    {userOrg.role.toLocaleLowerCase()}
+                                  </Badge>
                                 </CardTitle>
                               </CardHeader>
                             </Card>

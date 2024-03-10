@@ -1,5 +1,5 @@
-import { createEnv } from "@t3-oss/env-nextjs"
-import { z } from "zod"
+import { createEnv } from '@t3-oss/env-nextjs'
+import { z } from 'zod'
 
 export const env = createEnv({
   /**
@@ -9,8 +9,8 @@ export const env = createEnv({
   server: {
     DATABASE_URL: z.string(),
     DATABASE_PASSWORD: z.string(),
-    NODE_ENV: z.enum(["development", "test", "production"]).default("development"),
-    NEXTAUTH_SECRET: process.env.NODE_ENV === "production" ? z.string() : z.string().optional(),
+    NODE_ENV: z.enum(['development', 'test', 'production']).default('development'),
+    NEXTAUTH_SECRET: process.env.NODE_ENV === 'production' ? z.string() : z.string().optional(),
     NEXTAUTH_URL: z.preprocess(
       // This makes Vercel deployments not fail if you don't set NEXTAUTH_URL
       // Since NextAuth.js automatically uses the VERCEL_URL if present.
@@ -25,6 +25,7 @@ export const env = createEnv({
     SMTP_HOST: z.string(),
     SMTP_PORT: z.string(),
     EMAIL_FROM: z.string(),
+    BASE_PATH: z.string(),
   },
 
   /**
@@ -53,6 +54,7 @@ export const env = createEnv({
     SMTP_HOST: process.env.SMTP_HOST,
     SMTP_PORT: process.env.SMTP_PORT,
     EMAIL_FROM: process.env.EMAIL_FROM,
+    BASE_PATH: process.env.BASE_PATH,
   },
   /**
    * Makes it so that empty strings are treated as undefined. `SOME_VAR: z.string()` and

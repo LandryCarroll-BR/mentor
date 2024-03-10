@@ -1,11 +1,10 @@
+import Link from 'next/link'
 import { ArrowLeftIcon, GlobeIcon } from '@radix-ui/react-icons'
 
+import { Button } from '@/ui/button'
 import { Box } from '@/components/layout'
 import { SessionLoader } from '@/data/loaders/session-loader'
 import { UserOrganizationLoader } from '@/data/loaders/user-organization'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/ui/select'
-import { Button } from './ui/button'
-import Link from 'next/link'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from './ui/dropdown-menu'
 
 function UserOrganizationMenu({ organizationId }: { organizationId: string }) {
@@ -13,7 +12,7 @@ function UserOrganizationMenu({ organizationId }: { organizationId: string }) {
     <Box className='mb-4 h-fit border-b pb-2'>
       <SessionLoader>
         {({ user }) => (
-          <Box className='pb-2'>
+          <Box className='pb-1'>
             <DropdownMenu>
               <UserOrganizationLoader userId={user.id} organizationId={organizationId} fallback={<>testing</>}>
                 {({ userOrg }) => (
