@@ -33,14 +33,12 @@ interface UserOrganizationListProps {
 
 async function MentorList({ children, fallback, organizationId }: UserOrganizationListProps) {
   if (!organizationId) return
-  console.log(organizationId)
 
   const cachesMentors = cache(async () => fetchMentorsByOrganization({ organizationId }), [`user-mentors${organizationId}`], {
     tags: [`user-mentors`],
   })
 
   const { data: mentors } = await cachesMentors()
-  console.log(mentors)
 
   if (!mentors) return <>{fallback}</>
 

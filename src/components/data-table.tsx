@@ -1,42 +1,12 @@
 'use client'
 
 import { ColumnDef, flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table'
-
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
-
-export type Mentor =
-  | {
-      name: string
-      email: string
-      status: 'Pending' | 'Complete'
-      referrerEmail: string
-    }
-  | unknown
 
 export interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
 }
-
-export const mentorColumns: ColumnDef<Mentor>[] = [
-  {
-    accessorKey: 'name',
-    header: 'Name',
-  },
-
-  {
-    accessorKey: 'email',
-    header: 'Mentor Email',
-  },
-  {
-    accessorKey: 'referrerEmail',
-    header: 'Reference Email',
-  },
-  {
-    accessorKey: 'status',
-    header: 'Status',
-  },
-]
 
 export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData, TValue>) {
   const table = useReactTable({

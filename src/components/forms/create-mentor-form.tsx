@@ -8,10 +8,10 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { Input } from '@/ui/input'
 import { Button } from '@/ui/button'
 import { Flex } from '@/components/layout'
+import { createMentor } from '@/data/actions/mentor'
+import { createMentorSchema } from '@/data/schemas/mentor'
 import { useResponsiveDialog } from '@/components/responsive-dialog'
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/ui/form'
-import { createMentorSchema } from '../../data/schemas/mentor'
-import { createMentor } from '../../data/actions/mentor'
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/ui/form'
 
 const formSchema = createMentorSchema
 
@@ -41,7 +41,6 @@ function CreateMentorForm({ organizationId }: { organizationId: string }) {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Full Name</FormLabel>
-              <FormDescription>First and Last</FormDescription>
               <FormControl>
                 <Input autoComplete={'off'} autoFocus {...field} />
               </FormControl>
@@ -77,7 +76,7 @@ function CreateMentorForm({ organizationId }: { organizationId: string }) {
         />
         <Flex className='w-full pt-4'>
           <Button type='submit' className='ml-auto w-full md:w-fit' disabled={status === 'executing'}>
-            Create
+            Register
           </Button>
         </Flex>
       </form>

@@ -6,3 +6,8 @@ export const createMentorSchema = z.object({
   referrerEmail: z.string().email(),
   organizationId: z.string(),
 })
+
+export const assignMentorToMenteeSchema = z.object({
+  menteeId: z.string(),
+  mentorId: z.string(),
+})

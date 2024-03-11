@@ -13,14 +13,9 @@ export const fetchMenteesByOrganization = action(z.object({ organizationId: z.st
       role: true,
       user: {
         select: {
+          id: true,
           name: true,
           email: true,
-          referredBy: {
-            select: {
-              referrerEmail: true,
-              isCompleted: true,
-            },
-          },
         },
       },
     },

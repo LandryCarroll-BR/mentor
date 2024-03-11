@@ -4,7 +4,7 @@ import { revalidateTag } from 'next/cache'
 
 import prisma from '@/lib/prisma'
 import { action } from '@/lib/safe-action'
-import { createMentorSchema } from '@/data/schemas/mentor'
+import { assignMentorToMenteeSchema, createMentorSchema } from '@/data/schemas/mentor'
 
 export const createMentor = action(createMentorSchema, async ({ name, email, referrerEmail, organizationId }) => {
   const newMentor = await prisma.organization.update({
@@ -26,6 +26,18 @@ export const createMentor = action(createMentorSchema, async ({ name, email, ref
     },
     where: {
       id: organizationId,
+    },
+  })
+
+  revalidateTag(`user-mentors`)
+  return newMentor
+})
+
+export const assignMentorToMentee = action(assignMentorToMenteeSchema, async ({ menteeId, mentorId }) => {
+  const newMentor = await prisma.mentorMentee.create({
+    data: {
+      menteeId,
+      mentorId,
     },
   })
 

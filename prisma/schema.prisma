@@ -59,14 +59,14 @@ model VerificationToken {
 }
 
 model MentorMentee {
-  id        String   @id @default(cuid())
+  id        String    @id @default(cuid())
   mentorId  String
   menteeId  String
-  startDate DateTime
-  status    String
+  startDate DateTime?
+  status    String?
   goals     String?
-  mentee    User     @relation("MenteeAssignments", fields: [menteeId], references: [id])
-  mentor    User     @relation("MentorAssignments", fields: [mentorId], references: [id])
+  mentee    User      @relation("MenteeAssignments", fields: [menteeId], references: [id])
+  mentor    User      @relation("MentorAssignments", fields: [mentorId], references: [id])
 
   @@unique([mentorId, menteeId])
 }

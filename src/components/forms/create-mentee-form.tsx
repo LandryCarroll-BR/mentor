@@ -8,10 +8,10 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { Input } from '@/ui/input'
 import { Button } from '@/ui/button'
 import { Flex } from '@/components/layout'
+import { createMentee } from '@/data/actions/mentee'
+import { createMenteeSchema } from '@/data/schemas/mentee'
 import { useResponsiveDialog } from '@/components/responsive-dialog'
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/ui/form'
-import { createMenteeSchema } from '../../data/schemas/mentee'
-import { createMentee } from '../../data/actions/mentee'
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/ui/form'
 
 const formSchema = createMenteeSchema
 
@@ -41,7 +41,6 @@ function CreateMenteeForm({ organizationId }: { organizationId: string }) {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Full Name</FormLabel>
-              <FormDescription>First and Last</FormDescription>
               <FormControl>
                 <Input autoComplete={'off'} autoFocus {...field} />
               </FormControl>

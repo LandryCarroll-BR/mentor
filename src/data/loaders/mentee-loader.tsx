@@ -33,7 +33,6 @@ interface MenteesListProps {
 
 async function MenteeList({ children, fallback, organizationId }: MenteesListProps) {
   if (!organizationId) return
-  console.log(organizationId)
 
   const cachesMentees = cache(async () => fetchMenteesByOrganization({ organizationId }), [`user-mentees${organizationId}`], {
     tags: [`user-mentees`],

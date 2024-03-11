@@ -13,8 +13,37 @@ export const fetchMentorsByOrganization = action(z.object({ organizationId: z.st
       role: true,
       user: {
         select: {
+          id: true,
           name: true,
           email: true,
+          mentorAssignments: {
+            select: {
+              mentor: {
+                select: {
+                  name: true,
+                },
+              },
+              mentee: {
+                select: {
+                  name: true,
+                },
+              },
+            },
+          },
+          menteeAssignments: {
+            select: {
+              mentor: {
+                select: {
+                  name: true,
+                },
+              },
+              mentee: {
+                select: {
+                  name: true,
+                },
+              },
+            },
+          },
           referredBy: {
             select: {
               referrerEmail: true,

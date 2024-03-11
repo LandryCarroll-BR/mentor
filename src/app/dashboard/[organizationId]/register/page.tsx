@@ -47,11 +47,6 @@ export default async function Home({ params }: { params: { organizationId: strin
             )}
           </SessionLoader>
           <PageHeaderDescription>Fill out the form below to join as a mentor.</PageHeaderDescription>
-          <PageActions>
-            <Button asChild>
-              <Link href={'/login'}>Sign Up</Link>
-            </Button>
-          </PageActions>
         </PageHeader>
         <Container className='max-w-md'>
           <Box className='rounded-lg border p-4 shadow-lg'>
