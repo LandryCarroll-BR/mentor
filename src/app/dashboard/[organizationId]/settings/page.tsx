@@ -1,7 +1,12 @@
 import { Main } from '@/components/main'
 import { Box, Flex } from '@/components/layout'
-import { SidebarNav } from '@/root/src/components/sidebar-nav'
+import { SidebarNav } from '@/components/sidebar-nav'
+import { Separator } from '@/components/ui/separator'
+import { Heading, Paragraph } from '@/components/typography'
 import { UserOrganizationMenu } from '@/components/user-organization-menu'
+import { UpdateOrganizationForm } from '@/root/src/components/forms/update-organization-form'
+import { UserOrganizationLoader } from '@/root/src/data/loaders/user-organization'
+import { SessionLoader } from '@/root/src/data/loaders/session-loader'
 
 export default async function Dashboard({ params }: { params: { organizationId: string } }) {
   return (
@@ -17,7 +22,22 @@ export default async function Dashboard({ params }: { params: { organizationId: 
           </Flex>
           <Flex className='flex-1 flex-col p-4 pt-0.5'>
             <Box className='w-full flex-1 rounded-md border bg-white'>
-              <div className=''></div>
+              <Flex className='flex-col gap-2 p-8'>
+                <Heading as='h2' className='text-lg font-medium'>
+                  Organization
+                </Heading>
+                <Paragraph className='text-muted-foreground'>Adjust organizational settings</Paragraph>
+                <Separator />
+                <Box className='pt-4'>
+                  <SessionLoader>
+                    {({ user }) => (
+                      <UserOrganizationLoader userId={user.id} organizationId={params.organizationId}>
+                        {({ userOrg }) => <UpdateOrganizationForm organization={userOrg} userId={user.id} />}
+                      </UserOrganizationLoader>
+                    )}
+                  </SessionLoader>
+                </Box>
+              </Flex>
             </Box>
           </Flex>
         </Flex>
