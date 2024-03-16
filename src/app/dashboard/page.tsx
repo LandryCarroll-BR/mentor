@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { Suspense } from 'react'
 
+import { Badge } from '@/ui/badge'
 import { Main } from '@/components/main'
 import { Icons } from '@/components/icons'
 import { UserNav } from '@/components/user-nav'
@@ -10,11 +11,10 @@ import { ProtectedPage } from '@/components/protected-page'
 import { Heading, Paragraph } from '@/components/typography'
 import { SessionLoader } from '@/data/loaders/session-loader'
 import { Box, Container, Flex, Grid } from '@/components/layout'
-import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardHeader, CardTitle } from '@/components/ui/card'
 import { UserOrganizationLoader } from '@/data/loaders/user-organization'
 import { CreateOrganizationForm } from '@/root/src/components/forms/create-organization-form'
-import { ResponsiveDialog, ResponsiveDialogContent, ResponsiveDialogTrigger } from '../../components/responsive-dialog'
-import { Badge } from '../../components/ui/badge'
+import { ResponsiveDialog, ResponsiveDialogContent, ResponsiveDialogTrigger } from '@/components/responsive-dialog'
 
 export default async function Dashboard() {
   return (

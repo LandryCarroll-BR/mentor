@@ -9,7 +9,7 @@ import { SignInButton } from '@/components/sign-in-button'
 import { SessionLoader } from '@/data/loaders/session-loader'
 import { CreateMentorForm } from '@/components/forms/create-mentor-form'
 import { UserOrganizationLoader } from '@/data/loaders/user-organization'
-import { PageActions, PageHeader, PageHeaderDescription, PageHeaderHeading } from '@/components/page-header'
+import { PageHeader, PageHeaderDescription, PageHeaderHeading } from '@/components/page-header'
 
 export default async function Home({ params }: { params: { organizationId: string } }) {
   return (
