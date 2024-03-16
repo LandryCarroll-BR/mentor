@@ -14,9 +14,13 @@ interface UserOrganizationLoaderProps {
 async function MenteeLoader({ children, fallback, organizationId, userId }: UserOrganizationLoaderProps) {
   if (!userId || !organizationId) return
 
-  const cachedUserOrgs = cache(async () => fetchUserOrganization({ userId, organizationId }), [`user-organization${organizationId}`], {
-    tags: [`user-organization`],
-  })
+  const cachedUserOrgs = cache(
+    async () => fetchUserOrganization({ userId, organizationId }),
+    [`user-organization${organizationId + userId}`],
+    {
+      tags: [`user-organization`],
+    }
+  )
 
   const { data: userOrg } = await cachedUserOrgs()
 

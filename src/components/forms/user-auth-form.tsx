@@ -12,9 +12,9 @@ import { Button } from '@/ui/button'
 import { Icons } from '@/components/icons'
 import { Box, Flex, Grid } from '@/components/layout'
 import { signInWithEmail } from '@/data/actions/auth'
+import { SignInButton } from '@/components/sign-in-button'
 import { signInWithEmailSchema } from '@/data/schemas/auth'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/ui/form'
-import { SignInButton } from '../sign-in-button'
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLFormElement> {}
 

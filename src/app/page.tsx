@@ -5,7 +5,6 @@ import { Main } from '@/components/main'
 import { Icons } from '@/components/icons'
 import { Button } from '@/components/ui/button'
 import { Box, Flex } from '@/components/layout'
-import { SignInButton } from '@/components/sign-in-button'
 import { SessionLoader } from '@/data/loaders/session-loader'
 import { UserOrganizationLoader } from '@/data/loaders/user-organization'
 import { PageActions, PageHeader, PageHeaderDescription, PageHeaderHeading } from '@/components/page-header'
@@ -22,7 +21,13 @@ export default async function Home() {
         </Link>
         <Flex className='ml-auto items-center'>
           <Suspense>
-            <SessionLoader fallback={<SignInButton variant={'outline'}>Log In</SignInButton>}>
+            <SessionLoader
+              fallback={
+                <Button asChild variant={'outline'}>
+                  <Link href={'/login'}>Log In</Link>
+                </Button>
+              }
+            >
               {({ user }) => (
                 <UserOrganizationLoader.List userId={user.id}>
                   {({ userOrgs }) => (

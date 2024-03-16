@@ -13,9 +13,13 @@ interface UserOrganizationLoaderProps {
 async function UserOrganizationLoader({ children, fallback, organizationId, userId }: UserOrganizationLoaderProps) {
   if (!userId || !organizationId) return
 
-  const cachedUserOrgs = cache(async () => fetchUserOrganization({ userId, organizationId }), [`user-organization${organizationId}`], {
-    tags: [`user-organization`],
-  })
+  const cachedUserOrgs = cache(
+    async () => fetchUserOrganization({ userId, organizationId }),
+    [`user-organization-${organizationId + userId}`],
+    {
+      tags: [`user-organization`],
+    }
+  )
 
   const { data: userOrg } = await cachedUserOrgs()
 
@@ -33,7 +37,7 @@ interface UserOrganizationListProps {
 async function UserOrganizationList({ children, fallback, userId }: UserOrganizationListProps) {
   if (!userId) return
 
-  const cachedUserOrgs = cache(async () => fetchAllUserOrganizations({ userId }), [`user-organization`], {
+  const cachedUserOrgs = cache(async () => fetchAllUserOrganizations({ userId }), [`user-organizations-${userId}`], {
     tags: [`user-organization`],
   })
 

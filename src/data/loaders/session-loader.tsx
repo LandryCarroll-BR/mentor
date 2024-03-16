@@ -15,7 +15,7 @@ async function SessionLoader({ children, fallback }: SessionLoaderProps) {
 
   if (!session) return <>{fallback}</>
 
-  const cachedUser = cache(() => fetchUser({ email: session?.user?.email ?? '' }), ['user'], { tags: ['user'] })
+  const cachedUser = cache(() => fetchUser({ email: session?.user?.email ?? '' }), [`user-${session.user?.email}`], { tags: ['user'] })
 
   const { data: user } = await cachedUser()
 
