@@ -18,7 +18,7 @@ async function MentorLoader({ children, fallback, organizationId, userId }: User
     async () => fetchUserOrganization({ userId, organizationId }),
     [`user-organization-${organizationId + userId}`],
     {
-      tags: [`user-organization`],
+      tags: ['user-organization', 'user'],
     }
   )
 
@@ -39,7 +39,7 @@ async function MentorList({ children, fallback, organizationId }: UserOrganizati
   if (!organizationId) return
 
   const cachesMentors = cache(async () => fetchMentorsByOrganization({ organizationId }), [`user-mentors-${organizationId}`], {
-    tags: [`user-mentors`],
+    tags: ['user-mentors', 'user'],
   })
 
   const { data: mentors } = await cachesMentors()

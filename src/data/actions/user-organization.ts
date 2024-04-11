@@ -11,7 +11,9 @@ export const createUserOrganization = action(createUserOrgSchema, async ({ name,
   const newUserOrganization = await prisma.userOrganization.create({
     data: { role: 'ADMIN', userId, organizationId: newOrganization.id },
   })
+
   revalidateTag(`user-organization`)
+
   return newUserOrganization
 })
 
@@ -29,6 +31,8 @@ export const updateUserOrganization = action(updateUserOrgSchema, async ({ organ
       },
     },
   })
+
   revalidateTag(`user-organization`)
+
   return newUserOrganization
 })

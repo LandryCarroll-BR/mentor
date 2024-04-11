@@ -105,8 +105,9 @@ model Assessment {
 model Question {
   id           String     @id @default(cuid())
   assessmentId String
-  text         String
   youtubeUrl   String?
+  description  String?
+  title        String
   choices      Choice[]
   assessment   Assessment @relation(fields: [assessmentId], references: [id])
 }

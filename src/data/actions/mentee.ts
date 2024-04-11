@@ -26,5 +26,6 @@ export const createMentee = action(createMenteeSchema, async ({ name, organizati
   })
 
   revalidateTag(`user-mentees`)
+
   return newMentee
 })

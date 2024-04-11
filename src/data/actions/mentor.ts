@@ -42,5 +42,6 @@ export const assignMentorToMentee = action(assignMentorToMenteeSchema, async ({ 
   })
 
   revalidateTag(`user-mentors`)
+
   return newMentor
 })

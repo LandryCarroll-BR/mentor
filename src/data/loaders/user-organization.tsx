@@ -38,7 +38,7 @@ async function UserOrganizationList({ children, fallback, userId }: UserOrganiza
   if (!userId) return
 
   const cachedUserOrgs = cache(async () => fetchAllUserOrganizations({ userId }), [`user-organizations-${userId}`], {
-    tags: [`user-organization`],
+    tags: ['user-organization', 'user'],
   })
 
   const { data: userOrgs } = await cachedUserOrgs()

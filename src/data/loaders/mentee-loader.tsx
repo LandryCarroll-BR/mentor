@@ -18,7 +18,7 @@ async function MenteeLoader({ children, fallback, organizationId, userId }: User
     async () => fetchUserOrganization({ userId, organizationId }),
     [`user-organization${organizationId + userId}`],
     {
-      tags: [`user-organization`],
+      tags: ['user-organization', 'user'],
     }
   )
 
@@ -39,7 +39,7 @@ async function MenteeList({ children, fallback, organizationId }: MenteesListPro
   if (!organizationId) return
 
   const cachesMentees = cache(async () => fetchMenteesByOrganization({ organizationId }), [`user-mentees${organizationId}`], {
-    tags: [`user-mentees`],
+    tags: ['user-mentees', 'user'],
   })
 
   const { data: mentees } = await cachesMentees()

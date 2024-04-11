@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button'
 import { useMediaQuery } from '@/root/src/hooks/use-media-query'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { Drawer, DrawerClose, DrawerContent, DrawerFooter, DrawerTrigger } from '@/components/ui/drawer'
+import { cn } from '../lib/utils'
 
 type ResponsiveDialogContextValue = {
   open: boolean
@@ -51,13 +52,18 @@ const ResponsiveDialogTrigger: React.FC<React.ComponentProps<typeof DialogTrigge
   return <DrawerTrigger {...props}>{children}</DrawerTrigger>
 }
 
-const ResponsiveDialogContent: React.FC<React.PropsWithChildren> = ({ children }) => {
+const ResponsiveDialogContent: React.FC<React.ComponentProps<typeof DialogContent>> = ({ children, className, ...props }) => {
   const isDesktop = useMediaQuery('(min-width: 768px)')
 
-  if (isDesktop) return <DialogContent>{children}</DialogContent>
+  if (isDesktop)
+    return (
+      <DialogContent className={cn(className)} {...props}>
+        {children}
+      </DialogContent>
+    )
 
   return (
-    <DrawerContent className='overflow-hidden'>
+    <DrawerContent className={cn('overflow-hidden', className)}>
       {children}
       <DrawerFooter className='mx-auto w-full max-w-sm pt-3'>
         <DrawerClose asChild>

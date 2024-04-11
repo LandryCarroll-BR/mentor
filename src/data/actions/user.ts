@@ -3,9 +3,10 @@
 import prisma from '@/lib/prisma'
 import { action } from '@/lib/safe-action'
 import { createUserSchema } from '@/data/schemas/user'
+import { revalidateTag } from 'next/cache'
 
 export const createUser = action(createUserSchema, async ({}) => {
-  return await prisma.user.create({
+  const user = await prisma.user.create({
     data: {
       name: '',
       email: '',
@@ -22,4 +23,8 @@ export const createUser = action(createUserSchema, async ({}) => {
       },
     },
   })
+
+  revalidateTag('user')
+
+  return user
 })
