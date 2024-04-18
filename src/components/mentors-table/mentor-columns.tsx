@@ -18,6 +18,7 @@ import { DotsHorizontalIcon } from '@radix-ui/react-icons'
 import { fetchMenteesByOrganization } from '@/data/queries/mentee'
 import { MenteeData } from '@/components/mentors-table/mentee-data'
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@/ui/sheet'
+import { AssessmentData } from './assessment-data'
 
 export type Mentor = {
   mentorId: string
@@ -74,31 +75,43 @@ export const mentorColumns: ColumnDef<Mentor>[] = [
     header: '',
     cell: ({ row }) => {
       return (
-        <Sheet>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant='ghost' className='h-8 w-8 p-0'>
-                <span className='sr-only'>Open menu</span>
-                <DotsHorizontalIcon className='h-4 w-4' />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align='end'>
-              <DropdownMenuLabel>Actions</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant='ghost' className='h-8 w-8 p-0'>
+              <span className='sr-only'>Open menu</span>
+              <DotsHorizontalIcon className='h-4 w-4' />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align='end'>
+            <DropdownMenuLabel>Actions</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem onClick={(e) => e.preventDefault()}>
+              <Sheet>
                 <SheetTrigger className='w-full justify-start text-start'>Assign to Mentee</SheetTrigger>
-              </DropdownMenuItem>
-              <DropdownMenuItem>Resend Reference Email</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-          <SheetContent className='!w-3/4'>
-            <SheetHeader>
-              <SheetTitle>Select a Mentee</SheetTitle>
-              <SheetDescription>Assign {row.original.mentorName} to a mentee.</SheetDescription>
-            </SheetHeader>
-            <MenteeData organizationId={row.original.organizationId} mentorId={row.original.mentorId} />
-          </SheetContent>
-        </Sheet>
+                <SheetContent className='!w-3/4'>
+                  <SheetHeader>
+                    <SheetTitle>Select a Mentee</SheetTitle>
+                    <SheetDescription>Assign {row.original.mentorName} to a mentee.</SheetDescription>
+                  </SheetHeader>
+                  <MenteeData organizationId={row.original.organizationId} mentorId={row.original.mentorId} />
+                </SheetContent>
+              </Sheet>
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={(e) => e.preventDefault()}>
+              <Sheet>
+                <SheetTrigger className='w-full justify-start text-start'>Assign an Assessment</SheetTrigger>
+                <SheetContent className='!w-3/4'>
+                  <SheetHeader>
+                    <SheetTitle>Select an Assessment</SheetTitle>
+                    <SheetDescription>Assign {row.original.mentorName} to an assessment.</SheetDescription>
+                  </SheetHeader>
+                  <AssessmentData organizationId={row.original.organizationId} mentorId={row.original.mentorId} />
+                </SheetContent>
+              </Sheet>
+            </DropdownMenuItem>
+            <DropdownMenuItem>Resend Reference Email</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       )
     },
   },

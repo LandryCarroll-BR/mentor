@@ -1,13 +1,10 @@
-import { PlusIcon } from '@radix-ui/react-icons'
-
-import { Button } from '@/ui/button'
 import { Main } from '@/components/main'
 import { Box, Flex } from '@/components/layout'
-import { SidebarNav } from '@/root/src/components/sidebar-nav'
-import { ProtectedPage } from '@/root/src/components/protected-page'
-import { SessionLoader } from '@/root/src/data/loaders/session-loader'
+import { SidebarNav } from '@/components/sidebar-nav'
+import { ProtectedPage } from '@/components/protected-page'
+import { SessionLoader } from '@/data/loaders/session-loader'
 import { UserOrganizationMenu } from '@/components/user-organization-menu'
-import { CreateAssessmentForm } from '@/root/src/components/forms/create-assessment-form'
+import { CreateAssessmentForm } from '@/components/forms/create-assessment-form'
 
 export default async function Dashboard({ params }: { params: { organizationId: string } }) {
   return (
@@ -23,12 +20,6 @@ export default async function Dashboard({ params }: { params: { organizationId: 
               <Flex className='w-full flex-1 flex-col gap-3 rounded-lg bg-muted p-0'>
                 <Flex className='w-full p-4 pb-0'>
                   <Box className='text-3xl font-semibold'>New Assessment</Box>
-                  {/* <Box className='ml-auto'>
-                    <Button className='gap-2 pl-2' size={'sm'}>
-                      <PlusIcon />
-                      Create Assessment
-                    </Button>
-                  </Box> */}
                 </Flex>
                 <Flex className='flex-1 flex-col p-4 pt-0.5'>
                   <Box className='w-full flex-1 rounded-md border bg-white'>

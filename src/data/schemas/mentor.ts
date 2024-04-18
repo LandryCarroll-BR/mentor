@@ -11,3 +11,8 @@ export const assignMentorToMenteeSchema = z.object({
   menteeId: z.string(),
   mentorId: z.string(),
 })
+
+export const assignMentorToAssessmentSchema = z.object({
+  assessmentId: z.string(),
+  mentorId: z.string(),
+})

@@ -42,6 +42,7 @@ model User {
   accounts          Account[]
   assessments       Assessment[]
   assessmentResults AssessmentResult[]
+  AssessmentToUser  AssessmentToUser[]
   certifications    Certification[]
   menteeAssignments MentorMentee[]     @relation("MenteeAssignments")
   mentorAssignments MentorMentee[]     @relation("MentorAssignments")
@@ -89,17 +90,29 @@ model Organization {
 }
 
 model Assessment {
-  id             String             @id @default(cuid())
-  title          String
-  description    String?
-  organizationId String
-  passingScore   Float?
-  userId         String?
-  organization   Organization       @relation(fields: [organizationId], references: [id])
-  User           User?              @relation(fields: [userId], references: [id])
-  results        AssessmentResult[]
-  certifiedUsers Certification[]
-  questions      Question[]
+  id               String             @id @default(cuid())
+  title            String
+  description      String?
+  organizationId   String
+  passingScore     Float?
+  userId           String?
+  organization     Organization       @relation(fields: [organizationId], references: [id])
+  User             User?              @relation(fields: [userId], references: [id])
+  results          AssessmentResult[]
+  AssessmentToUser AssessmentToUser[]
+  certifiedUsers   Certification[]
+  questions        Question[]
+}
+
+model AssessmentToUser {
+  id           String     @id @default(cuid())
+  userId       String
+  assessmentId String
+  completedAt  DateTime   @default(now())
+  assessment   Assessment @relation(fields: [assessmentId], references: [id])
+  user         User       @relation(fields: [userId], references: [id])
+
+  @@unique([userId, assessmentId])
 }
 
 model Question {

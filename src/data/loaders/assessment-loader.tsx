@@ -1,7 +1,8 @@
 import { unstable_cache as cache } from 'next/cache'
 
 import { LoaderData } from '@/lib/utils'
-import { fetchAssessmentsByOrganizationId } from '@/root/src/data/queries/assessment'
+import { fetchAssessmentsByOrganizationId, fetchAssessmentsByUserId } from '@/root/src/data/queries/assessment'
+import { Role } from '@prisma/client'
 
 interface AssessmentLoaderProps {
   children: ({ userOrg }: { userOrg: LoaderData<typeof fetchAssessmentsByOrganizationId> }) => React.ReactNode
@@ -32,19 +33,28 @@ interface AssessmentsListProps {
   children: ({ assessments }: { assessments: LoaderData<typeof fetchAssessmentsByOrganizationId> }) => React.ReactNode
   organizationId?: string
   fallback?: React.ReactNode
+  role?: Role
+  userId?: string
 }
 
-async function AssessmentList({ children, fallback, organizationId }: AssessmentsListProps) {
+async function AssessmentList({ children, fallback, organizationId, role, userId }: AssessmentsListProps) {
   if (!organizationId) return
 
-  const cachesAssessments = cache(async () => fetchAssessmentsByOrganizationId({ organizationId }), [`assessments${organizationId}`], {
+  if (role === 'MENTOR') {
+    if (!userId) return
+    const cachedMentorAssessments = cache(async () => fetchAssessmentsByUserId({ userId }), [`assessments${organizationId}`], {
+      tags: ['assessments'],
+    })
+    const { data: assessments } = await cachedMentorAssessments()
+    if (!assessments) return <>{fallback}</>
+    return <>{children({ assessments: assessments.map(({ assessment }) => assessment) })}</>
+  }
+
+  const cachedAllAssessments = cache(async () => fetchAssessmentsByOrganizationId({ organizationId }), [`assessments${organizationId}`], {
     tags: ['assessments'],
   })
-
-  const { data: assessments } = await cachesAssessments()
-
+  const { data: assessments } = await cachedAllAssessments()
   if (!assessments) return <>{fallback}</>
-
   return <>{children({ assessments })}</>
 }
 
